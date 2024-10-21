@@ -1,0 +1,58 @@
+@import 'src/styles.less';
+
+main {
+  margin: 0;
+  padding: 0;
+  background-color: @bg-color-dark;
+  color: @bg-color-light;
+  height: 54px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-title {
+  font-size: 24px;
+  font-weight: 500;
+  width: 15%;
+  user-select: none;
+}
+
+.nav-title:hover {
+  cursor: default;
+}
+
+.nav-links {
+  width: 55%;
+  font-size: 15px;
+  font-weight: 300;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links span {
+  padding: 8px;
+  user-select: none;
+}
+
+.nav-links span:hover {
+  cursor: pointer;
+  background-color: @bg-color-gray;
+  border-radius: 16px;
+}
+
+.nav-links span:active {
+  cursor: pointer;
+  background-color: @bg-color-gray1;
+  border-radius: 16px;
+}
+
+.sign-up-button {
+  font-weight: 375;
+  background-color: @bg-color-light;
+  color: @bg-color-dark;
+  border-radius: 16px;
+}
