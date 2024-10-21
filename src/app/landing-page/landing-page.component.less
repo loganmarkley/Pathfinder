@@ -1,23 +1,89 @@
+@import 'src/styles.less';
+
+
 main {
   width: 100%;
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 80px;
   align-items: center;
   box-sizing: inherit;
   position: relative;
 }
 
 .landing-page-container {
-  height: 730px;
+  height: 700px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 60px;
-  width: 80vw;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  row-gap: 100px;
+  column-gap: 100px;
+  width: 66vw;
 }
 
 .landing-page-container div {
-  background-color: red;
+  background-color: @bg-color-gray2;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 350;
+  padding: 30px;
+}
+
+.landing-page-card {
+  width: 31%;
+  height: 80%;
+  cursor: pointer;
+  border-radius: 10px;
+  justify-content: space-between;
+}
+
+.landing-page-card-title {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.landing-page-card-button:hover {
+  background-color: @bg-color-gray1;
+}
+
+.landing-page-card-button {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  background-color: @bg-color-gray2;
+  margin-left: 6px;
+  padding: 8px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background-color 0.4s ease;
+}
+
+.landing-page-main-button:hover {
+  background-color: @bg-color-gray1;
+}
+
+.landing-page-main-button:active {
+  background-color: @bg-color-gray;
+}
+
+.landing-page-main-button {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 22px;
+  border: none;
+  background-color: @bg-color-dark;
+  color: @bg-color-light;
+  padding: 20px;
+  padding-right: 36px;
+  padding-left: 36px;
+  border-radius: 36px;
+  cursor: pointer;
+  transition: background-color 0.4s ease;
 }
