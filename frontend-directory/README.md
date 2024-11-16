@@ -1,35 +1,28 @@
-# Pathfinder
+# Pathfinder Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
+## Overview
+The frontend of the Pathfinder application provides users with a graphical interface to interact with the backend service and display route information.
 
-## PROJECT INITIALIZATION:
-1. Make sure you have the latest LTS version of Node (I recommend using the nvm package manager)
-2. In a terminal, run `npm install -g @angular/cli`
-3. Then, in the frontend directory, run `npm install` to install all dependencies
-3. Finally, run `ng serve` to run the dev server and navigate to `http://localhost:4200/`. 
+## Structure
+- **.angular**: Configuration and files related to Angular framework
+- **node_modules**: Contains all JavaScript dependencies installed
+- **public**: Static files served by the application
+- **src**: The source directory for Angular components and services
+- **.editorconfig**: Ensures consistent coding styles between different editors and IDEs
+- **.gitignore**: Specifies files to ignore in Git
+- **angular.json**: Configuration file for the Angular project
+- **package-lock.json**: Locks the versions of dependencies
+- **package.json**: Contains metadata about the project and dependencies
+- **README.md**: Documentation for the frontend
+- **server.ts**: Sets up the server for the frontend application
+- **tsconfig.*.json**: TypeScript configuration files
 
-The application will automatically reload if you change any of the source files.
+## Functionalities
+- **User Interface**: A user-friendly interface to input route data
+- **Dynamic Pricing Display**: Showcases pricing and route suggestions fetched from the backend
 
-
-
-# Old Angular Boilerplate README
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Getting Started
+1. Clone the repository
+2. Navigate to the frontend directory
+3. Run `npm install` to install dependencies
+4. Serve the application with `ng serve`

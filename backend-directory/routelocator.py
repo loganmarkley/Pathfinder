@@ -2,11 +2,13 @@ from pydantic import BaseModel
 import requests
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
+from dotenv import find_dotenv, load_dotenv
+
+load_dotenv(find_dotenv())
 
 #front end gets route, backend gets route from front end, geocodes route, returns important info
 
 app = FastAPI()
-HERE_API_KEY = 'YOUR_HERE_API_KEY'
 
 class RouteRequest(BaseModel):
     startAddress: str
