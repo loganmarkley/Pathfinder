@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RouteGeneratorComponent } from './route-generator.component';
+import { GeneratorComponent } from './generator.component';
 
-describe('RouteGeneratorComponent', () => {
-  let component: RouteGeneratorComponent;
-  let fixture: ComponentFixture<RouteGeneratorComponent>;
+describe('GeneratorComponent', () => {
+  let component: GeneratorComponent;
+  let fixture: ComponentFixture<GeneratorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouteGeneratorComponent]
+      imports: [GeneratorComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RouteGeneratorComponent);
+    fixture = TestBed.createComponent(GeneratorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
