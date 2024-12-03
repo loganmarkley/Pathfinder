@@ -14,18 +14,47 @@
   </div>
 </div> -->
 
-<form [formGroup]="routeForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="origin">Origin:</label>
-    <input id="origin" type="text" formControlName="origin" placeholder="Enter origin location">
-  </div>
+<div class="generator-flexbox">
+  <form [formGroup]="routeForm" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="form-input-container">
+      <label for="origin">Origin:</label>
+      <input id="origin" type="text" formControlName="origin" placeholder="Enter origin location">
+    </div>
 
-  <div class="form-group">
-    <label for="destination">Destination:</label>
-    <input id="destination" type="text" formControlName="destination" placeholder="Enter destination location">
-  </div>
+    <div class="form-input-container" style="width: 390px;">
+      <label for="destination">Number of Travelers:</label>
+      <input id="travelerCount" type="number" formControlName="travelers" placeholder="Enter traveler count">
+    </div>
 
-  <button type="submit" [disabled]="!routeForm.valid">
-    Submit Route
-  </button>
-</form>
+    <div class="form-input-container">
+      <label for="destination">Destination:</label>
+      <input id="destination" type="text" formControlName="destination" placeholder="Enter destination location">
+    </div>
+
+    <button type="submit" [disabled]="!routeForm.valid">
+      Generate Routes
+    </button>
+  </form>
+
+  @if (loadingRoutes === true) {
+  <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; margin-top: 6px;">
+    <div class="loadingSymbol"></div>
+    <p>Generating routes...</p>
+  </div>
+  }
+
+  <!-- <p>{{carRoute}}</p> -->
+
+  @if (routesLoaded === true) {
+  <div class="route-information-container">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 0px;">
+      <h2>Generated Routes: </h2>
+      <p>sort</p>
+    </div>
+    <app-route-information-box test="fdas"></app-route-information-box>
+    <app-route-information-box test="fdas"></app-route-information-box>
+    <app-route-information-box test="fdas"></app-route-information-box>
+    <app-route-information-box test="fdas"></app-route-information-box>
+  </div>
+  }
+</div>
