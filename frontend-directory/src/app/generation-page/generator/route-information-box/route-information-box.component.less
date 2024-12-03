@@ -1,0 +1,75 @@
+@import 'src/styles.less';
+
+.route-box {
+  display: grid;
+  max-width: 100%;
+  height: 200px;
+  row-gap: 18px;
+  grid-template-columns: 19% repeat(3, 27%);
+  grid-template-areas:
+    "logo price duration distance"
+    "logo details details details";
+  background: #D3D3D3;
+  border-radius: 10px;
+  padding: 20px;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.25)
+}
+
+.statistic-cell {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.25)
+}
+
+.route-box-cell {
+  border-radius: 10px;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  justify-content: center;
+  height: 90%;
+  width: 90%;
+  background-color: rgb(203, 203, 228);
+}
+
+.route-box-header {
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.route-box-value {
+  background-color: @bg-color-light;
+  color: @bg-color-dark;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  width: 80%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 1.3px;
+}
+
+.logo {
+  grid-area: logo;
+  background-color: rgb(224, 224, 224);
+}
+
+.price {
+  grid-area: price;
+}
+
+.duration {
+  grid-area: duration;
+}
+
+.distance {
+  grid-area: distance;
+}
+
+.details {
+  grid-area: details;
+}
