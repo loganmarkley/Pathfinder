@@ -16,7 +16,7 @@ interface RouteModel {
   sections: RouteSectionModel[],
 }
 
-interface RouteSectionModel {
+export interface RouteSectionModel {
   arrival: {
     time: string,
     place: any,
