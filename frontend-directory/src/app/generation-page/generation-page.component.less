@@ -12,7 +12,8 @@ main {
 }
 
 .generation-page-container {
-  height: 700px;
+  min-height: 700px;
+  margin-bottom: 50px;
   width: 86vw;
   display: flex;
   flex-direction: column;
@@ -21,4 +22,8 @@ main {
   padding: 30px;
   gap: 10px;
   background-color: @bg-color-gray2;
+}
+
+.generation-page-container app-generator {
+  width: 100%;
 }
