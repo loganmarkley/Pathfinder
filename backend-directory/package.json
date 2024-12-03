@@ -1,0 +1,10 @@
+{
+  "name": "backend-directory",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "python3 routelocator.py"
+  },
+  "author": "Matthew Dominicis",
+  "description": ""
+}
