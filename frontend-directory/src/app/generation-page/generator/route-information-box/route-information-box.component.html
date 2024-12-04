@@ -1,0 +1,60 @@
+<div class="route-box">
+  <div class="logo route-box-cell" style="flex-direction: column; align-items: center;">
+    @if (routeType === "uber") {
+    <img src="/UberBlackLogo.png" style="width: 70%; height: auto; border-radius: 10px;" />
+    }
+    @if (routeType === "lyft") {
+    <img src="/LyftPinkLogo.png" style="width: 70%; height: auto; border-radius: 10px;" />
+    }
+    @if (routeType === "car") {
+    <h3 style="margin-top: 10px; margin-bottom: -16px;">{{routeType.toUpperCase()}}</h3>
+    <mat-icon style="width: 100%; height: 100%; display: flex;
+        justify-content: center;
+        align-self: center;
+        font-size: 150px;" aria-hidden="true" aria-label="bicycle icon" title="car icon">directions_car</mat-icon>
+    }
+    @if (routeType === "bicycle") {
+    <h3 style="margin-top: 10px; margin-bottom: -16px;">{{routeType.toUpperCase()}}</h3>
+    <mat-icon style="width: 100%; height: 100%; display: flex;
+    justify-content: center;
+    align-self: center;
+    font-size: 140px;" aria-hidden="true" aria-label="bicycle icon" title="bicycle icon">pedal_bike</mat-icon>
+    }
+    @if (routeType === "pedestrian") {
+    <h3 style="margin-top: 10px; margin-bottom: -6px;">{{routeType.toUpperCase()}}</h3>
+    <mat-icon style="width: 100%; height: 100%; display: flex;
+    justify-content: center;
+    align-self: center;
+    font-size: 130px;" aria-hidden="true" aria-label="bicycle icon" title="pedestrian icon">directions_walk</mat-icon>
+    }
+  </div>
+
+  <div class="price route-box-cell statistic-cell">
+    <div class="route-box-header">Price</div>
+    @if (routeType === "uber" || routeType === "lyft") {
+    <div class="route-box-value">${{calculatedPrice.toFixed(2)}} (not including tip)</div>
+    } @else {
+    <div class="route-box-value">${{calculatedPrice.toFixed(2)}}</div>
+    }
+  </div>
+
+  <div class="duration route-box-cell statistic-cell">
+    <div class="route-box-header">Duration</div>
+    @if (durationObj.hours <= 0) { <div class="route-box-value">{{durationObj.minutes}} min(s)
+  </div>
+  } @else {
+  <div class="route-box-value">{{durationObj.hours}} hr(s), {{durationObj.minutes}} min(s)</div>
+  }
+</div>
+
+<div class="distance route-box-cell statistic-cell">
+  <div class="route-box-header">Distance</div>
+  <div class="route-box-value">{{distanceKm.toFixed(2)}} km / {{distanceMi.toFixed(2)}} mi</div>
+</div>
+
+<div class="details route-box-cell" style="background-color: inherit; justify-content: space-evenly;">
+  <div class="route-box-cell statistic-cell" style="width: 90%;">
+
+  </div>
+</div>
+</div>
