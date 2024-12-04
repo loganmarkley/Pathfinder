@@ -1,25 +1,31 @@
 <div class="route-box">
   <div class="logo route-box-cell" style="flex-direction: column; align-items: center;">
     @if (routeType === "uber") {
-    <img src="/UberBlackLogo.png" style="width: 94%; height: 94%; border-radius: 10px;" />
+    <img src="/UberBlackLogo.png" style="width: 70%; height: auto; border-radius: 10px;" />
     }
     @if (routeType === "lyft") {
-    <img src="/LyftPinkLogo.png" style="width: 94%; height: 94%; border-radius: 10px;" />
+    <img src="/LyftPinkLogo.png" style="width: 70%; height: auto; border-radius: 10px;" />
     }
     @if (routeType === "car") {
     <h3 style="margin-top: 10px; margin-bottom: -16px;">{{routeType.toUpperCase()}}</h3>
-    <mat-icon style="font-size: 176px; width: 100%; height: 100%; margin-right: -38px; margin-top: -6px;"
-      aria-hidden="false" aria-label="bicycle icon" title="bicycle icon" fontIcon="directions_car" />
+    <mat-icon style="width: 100%; height: 100%; display: flex;
+        justify-content: center;
+        align-self: center;
+        font-size: 150px;" aria-hidden="true" aria-label="bicycle icon" title="car icon">directions_car</mat-icon>
     }
     @if (routeType === "bicycle") {
     <h3 style="margin-top: 10px; margin-bottom: -16px;">{{routeType.toUpperCase()}}</h3>
-    <mat-icon style="font-size: 160px; width: 100%; height: 100%; margin-right: -52px; margin-top: 6px;"
-      aria-hidden="false" aria-label="bicycle icon" title="bicycle icon" fontIcon="pedal_bike" />
+    <mat-icon style="width: 100%; height: 100%; display: flex;
+    justify-content: center;
+    align-self: center;
+    font-size: 140px;" aria-hidden="true" aria-label="bicycle icon" title="bicycle icon">pedal_bike</mat-icon>
     }
     @if (routeType === "pedestrian") {
-    <h3 style="margin-top: 10px; margin-bottom: -16px;">{{routeType.toUpperCase()}}</h3>
-    <mat-icon style="font-size: 140px; width: 100%; height: 100%; margin-right: -72px; margin-top: 16px;"
-      aria-hidden="false" aria-label="bicycle icon" title="bicycle icon" fontIcon="directions_walk" />
+    <h3 style="margin-top: 10px; margin-bottom: -6px;">{{routeType.toUpperCase()}}</h3>
+    <mat-icon style="width: 100%; height: 100%; display: flex;
+    justify-content: center;
+    align-self: center;
+    font-size: 130px;" aria-hidden="true" aria-label="bicycle icon" title="pedestrian icon">directions_walk</mat-icon>
     }
   </div>
 
