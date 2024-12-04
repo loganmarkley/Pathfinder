@@ -30,13 +30,13 @@ z-index: 99;">Hel</div> -->
       <input id="destination" type="text" formControlName="destination" placeholder="Enter destination address">
     </div>
 
-    <button type="submit">
+    <button type="submit" style="margin-bottom: 6px;">
       Generate Routes
     </button>
   </form>
 
   @if (loadingRoutes === true) {
-  <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; margin-top: 6px;">
+  <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; margin-top: 6px; font-size: 26px;">
     <div class="loadingSymbol"></div>
     <p>Generating routes...</p>
   </div>
@@ -64,10 +64,13 @@ z-index: 99;">Hel</div> -->
       </div>
     </div>
 
-    @for (route of generatedRoutes; track route.type) {
-    <app-route-information-box [routeType]="route.type" [routeData]="route.data"
-      (priceCalculated)="onPriceCalculated($event)" />
-    }
+    <div class="route-information-container"
+      style="background-color:rgba(242, 246, 250, 0.521); border-radius: 10px; padding: 4px;">
+      @for (route of generatedRoutes; track route.type) {
+      <app-route-information-box [routeType]="route.type" [routeData]="route.data"
+        (priceCalculated)="onPriceCalculated($event)" />
+      }
+    </div>
   </div>
   }
 </div>
