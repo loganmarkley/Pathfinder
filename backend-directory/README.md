@@ -8,7 +8,7 @@ The backend of the Pathfinder application is responsible for processing requests
 - **.gitignore**: Specifies intentionally untracked files to ignore
 - **.gitkeep**: An empty file that keeps track of Git directories
 - **requirements.txt**: Lists the Python dependencies required for the backend
-- **routlocator.py**: The main script that processes routes and pricing
+- **routelocator.py**: The main script that processes routes and pricing
 
 ## Functionalities
 - **Route Analysis**: Analyzes transportation routes between two points
@@ -18,4 +18,4 @@ The backend of the Pathfinder application is responsible for processing requests
 1. Clone the repository
 2. Install dependencies from `requirements.txt`
 3. Set up environment variables in the `.env` file
-4. Run `routlocator.py` to start the backend service
+4. Run `routelocator.py` to start the backend service
