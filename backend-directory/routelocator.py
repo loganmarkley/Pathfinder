@@ -2,6 +2,7 @@ from typing import Dict
 from pydantic import BaseModel
 import requests
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from dotenv import find_dotenv, load_dotenv
 
