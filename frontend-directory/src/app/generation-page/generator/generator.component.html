@@ -1,0 +1,76 @@
+<!-- 
+THIS IS FOR A JUMP TO TOP BUTTON FOR THE GENERATE PAGE, might implement
+<div style="position: fixed; bottom: 30px;
+right: 30px;
+width: 40px;
+height: 40px;
+background-color: #000;
+color: white;
+border: none;
+border-radius: 50%;
+font-size: 20px;
+cursor: pointer;
+opacity: 1;
+z-index: 99;">Hel</div> -->
+
+<div class="generator-flexbox">
+  <form [formGroup]="routeForm" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="form-input-container">
+      <label for="origin">Origin:</label>
+      <input id="origin" type="text" formControlName="origin" placeholder="Enter origin address">
+    </div>
+
+    <div class="form-input-container" style="width: 406px;">
+      <label for="destination">Number of Travelers:</label>
+      <input id="travelerCount" type="number" formControlName="travelers" placeholder="Enter traveler count">
+    </div>
+
+    <div class="form-input-container">
+      <label for="destination">Destination:</label>
+      <input id="destination" type="text" formControlName="destination" placeholder="Enter destination address">
+    </div>
+
+    <button type="submit" style="margin-bottom: 6px;">
+      Generate Routes
+    </button>
+  </form>
+
+  @if (loadingRoutes === true) {
+  <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; margin-top: 6px; font-size: 26px;">
+    <div class="loadingSymbol"></div>
+    <p>Generating routes...</p>
+  </div>
+  }
+  @if (errorSubmittingForm === true) {
+  <div class="form-error">Error generating routes! Ensure that all fields are filled out and accurate.</div>
+  }
+
+  @if (routesLoaded === true) {
+  <div class="route-information-container">
+    <div
+      style="display: flex; justify-content: space-between; margin-bottom: -20px; margin-top: 30px; align-items: center;">
+      <div style="font-size: 32px; font-weight: 550;">Generated Routes</div>
+      <div class="sortBy-container">
+        <div style="text-wrap: nowrap; font-size: 17px; font-weight: 500; margin-right: 10px;">Sort by</div>
+        <div class="sort-select">
+          <select>
+            <option value="duration">Duration</option>
+            <option value="distance">Distance</option>
+            <option value="price">Price</option>
+          </select>
+        </div>
+        <mat-icon class="sortDirectionBtn" aria-hidden="false" aria-label="Ascending/descending icon"
+          title="ascending/descending" fontIcon="swap_vert" />
+      </div>
+    </div>
+
+    <div class="route-information-container"
+      style="background-color:rgba(242, 246, 250, 0.521); border-radius: 10px; padding: 4px;">
+      @for (route of generatedRoutes; track route.type) {
+      <app-route-information-box [routeType]="route.type" [routeData]="route.data"
+        (priceCalculated)="onPriceCalculated($event)" />
+      }
+    </div>
+  </div>
+  }
+</div>

@@ -1,3 +1,4 @@
+from typing import Dict
 from pydantic import BaseModel
 import requests
 from fastapi import FastAPI, HTTPException, Request
@@ -9,67 +10,82 @@ load_dotenv(find_dotenv())
 #front end gets route, backend gets route from front end, geocodes route, returns important info
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:4200"],  # Angular default port
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
-class RouteRequest(BaseModel):
-    startAddress: str
-    endAddress: str
+HERE_API_KEY = 'Dj8ma2p3D0zH0tBOcdn13L-7y9Z6L0lePzIo3Clw030'
+GEOCODE_BASE_URL = "https://geocode.search.hereapi.com/v1/geocode"
+ROUTE_BASE_URL = "https://router.hereapi.com/v8/routes"
 
-@app.post("/api/retrieveRoutes")
-async def post_data(request: Request):
-    payload = await request.json()
-    start, end = payload['origin'], payload['destination']
-    response = get_route(RouteRequest(startAddress=start, endAddress=end))
-    return JSONResponse(content=response, status_code=200)
+class LocationRequest(BaseModel):
+    origin: str
+    destination: str
 
-@app.post("/api/getRoute")
-async def get_route(route_request: RouteRequest):
-    startAddress = route_request.startAddress
-    endAddress = route_request.endAddress
-    try:
-        start_location = geocode(startAddress)
-        end_location = geocode(endAddress)
-        
-        if not start_location or not end_location:
-            raise HTTPException(status_code=404, detail="One or both addresses not found")
+class RouteResponse(BaseModel):
+    car_route: Dict
+    pedestrian_route: Dict
+    bicycle_route: Dict
 
-        routing_url = (
-            f"https://router.hereapi.com/v8/routes?transportMode=car"
-            f"&origin={start_location['lat']},{start_location['lng']}"
-            f"&destination={end_location['lat']},{end_location['lng']}"
-            f"&return=summary&apikey={HERE_API_KEY}"
-        )
+def geocode_address(address: str) -> tuple:
+    """Geocode an address using HERE Geocoding API"""
+    params = {
+        'q': address,
+        'apiKey': HERE_API_KEY
+    }
+    
+    response = requests.get(GEOCODE_BASE_URL, params=params)
+    
+    if response.status_code != 200:
+        raise HTTPException(status_code=500, 
+                          detail="Geocoding service failed")
+    
+    result = response.json()
+    
+    if not result['items']:
+        raise HTTPException(status_code=400, 
+                          detail=f"Could not geocode address: {address}")
+    
+    position = result['items'][0]['position']
+    return position['lat'], position['lng']
 
-        route_response = requests.get(routing_url)
-        route_response.raise_for_status()
-        route_data = route_response.json()
+def get_route(origin_coords: tuple, dest_coords: tuple, transport_mode: str) -> Dict:
+    """Get route using HERE Routing API"""
+    params = {
+        'apiKey': HERE_API_KEY,
+        'origin': f"{origin_coords[0]},{origin_coords[1]}",
+        'destination': f"{dest_coords[0]},{dest_coords[1]}",
+        'transportMode': transport_mode,
+        'return': 'summary,polyline'
+    }
+    
+    response = requests.get(ROUTE_BASE_URL, params=params)
+    
+    if response.status_code != 200:
+        raise HTTPException(status_code=500, 
+                          detail=f"Failed to get {transport_mode} route")
+    
+    return response.json()
 
-        route_summary = route_data["routes"][0]["sections"][0]["summary"]
-
-        return {
-            "distance": route_summary["length"],
-            "duration": route_summary["duration"]
-        }
-
-    except requests.RequestException as e:
-        raise HTTPException(status_code=500, detail=f"Failed to calculate route: {str(e)}")
-
-def geocode(address):
-    geocode_url = f"https://geocode.search.hereapi.com/v1/geocode?q={requests.utils.quote(address)}&apiKey={HERE_API_KEY}"
-
-    try:
-        response = requests.get(geocode_url)
-        response.raise_for_status()
-        data = response.json()
-        
-        location = data['items'][0]['position']
-        return location
-
-    except (IndexError, KeyError):
-        print("Address not found.")
-        return None
-    except requests.RequestException as e:
-        print("Error fetching geocode data:", e)
-        return None
+@app.post("/api/retrieveRoutes", response_model=RouteResponse)
+async def generate_routes(locations: LocationRequest):
+    # Geocode addresses
+    origin_coords = geocode_address(locations.origin)
+    dest_coords = geocode_address(locations.destination)
+    
+    # Get routes for different transport modes
+    routes = {}
+    transport_modes = ['car', 'pedestrian', 'bicycle']
+    
+    for mode in transport_modes:
+        route = get_route(origin_coords, dest_coords, mode)
+        routes[f"{mode}_route"] = route
+    
+    return RouteResponse(**routes)
 
 if __name__ == "__main__":
     import uvicorn
